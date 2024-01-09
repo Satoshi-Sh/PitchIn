@@ -6,6 +6,7 @@ module.exports = {
       animation: {
         "infinite-scroll": "infinite-scroll 40s linear infinite",
       },
+      colors: { gold: "#FFD700" },
       keyframes: {
         "infinite-scroll": {
           from: { transform: "translateX(0)" },
