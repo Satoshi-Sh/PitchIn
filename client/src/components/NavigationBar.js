@@ -1,5 +1,11 @@
 import logo from "../assets/images/food-logo.png";
+import { LoginButton } from "./buttons/login-button.js";
+import { LogoutButton } from "./buttons/logout-button.js";
+import { SignupButton } from "./buttons/signup-button.js";
+import { useAuth0 } from "@auth0/auth0-react";
+
 const NavigationBar = () => {
+  const { isAuthenticated, user } = useAuth0();
   return (
     <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -10,21 +16,22 @@ const NavigationBar = () => {
           </span>
         </div>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <div className="flex gap-3">
-            <button
-              type="button"
-              className=" border hover:bg-pink-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Signup
-            </button>
-            <button
-              type="button"
-              className="border hover:bg-violet-300 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Login
-            </button>
-          </div>
-          <button
+          {isAuthenticated ? (
+            <div className="flex gap-4 items-center">
+              <LogoutButton />
+              <img
+                src={user.picture}
+                alt="profile"
+                className="w-8 h-8 rounded-full"
+              />
+            </div>
+          ) : (
+            <div className="flex gap-3">
+              <SignupButton />
+              <LoginButton />
+            </div>
+          )}
+          {/* <button
             data-collapse-toggle="navbar-sticky"
             type="button"
             className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -47,7 +54,7 @@ const NavigationBar = () => {
                 d="M1 1h15M1 7h15M1 13h15"
               />
             </svg>
-          </button>
+          </button> */}
         </div>
         <div
           className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1"
