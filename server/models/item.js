@@ -7,9 +7,6 @@ const ItemSchema = new Schema({
   link: { type: String },
   price: { type: Number },
   store: { type: Schema.Types.ObjectId, ref: "Store" },
-  created_by: {
-    user: { type: Schema.Types.ObjectId, ref: "User" },
-  },
   created_at: {
     type: Date,
     default: Date.now,

@@ -7,6 +7,7 @@ const GroupSchema = new Schema({
   owner: { type: Schema.Types.ObjectId, ref: "User", required: true },
   users: [{ type: Schema.Types.ObjectId, ref: "User" }],
   stores: [{ type: Schema.Types.ObjectId, ref: "Store" }],
+  items: [{ type: Schema.Types.ObjectId, ref: "Item" }],
   max_num: { type: Number, integer: true, required: true },
 });
 
