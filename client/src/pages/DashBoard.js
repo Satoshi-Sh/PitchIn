@@ -10,9 +10,12 @@ const DashBoard = () => {
   // todo avoid making two requests
   useEffect(() => {
     const createAccount = async () => {
+      const username = user.name.includes("@")
+        ? user.name.split("@")[0]
+        : user.name;
       try {
         const response = await axios.post(`${backendApiUrl}/api/auth/signup`, {
-          username: user.name,
+          username,
           picture: user.picture,
           sub: user.sub,
         });
