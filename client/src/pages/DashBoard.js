@@ -1,11 +1,13 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import GroupCard from "../components/GroupCard";
 
 const DashBoard = () => {
   const { user } = useAuth0();
-  console.log(user);
   const [count, setCount] = useState(0);
+  const [myGroup, setMyGroup] = useState(null);
+  const [groups, setGroups] = useState([]);
   const backendApiUrl = process.env["REACT_APP_API_BASE_URL"];
   // todo avoid making two requests
   useEffect(() => {
@@ -19,12 +21,23 @@ const DashBoard = () => {
           picture: user.picture,
           sub: user.sub,
         });
-        console.log(response.data);
+        const { group } = response.data;
+        if (group) {
+          setMyGroup(group);
+        } else {
+          // get all the groups
+          try {
+            const response = await axios.get(`${backendApiUrl}/api/group/all`);
+            const { groups } = response.data;
+            setGroups(groups);
+          } catch (e) {
+            console.error("Error retrieving groups", e);
+          }
+        }
       } catch (e) {
         console.error("Error creating account", e);
       }
     };
-    console.log(count);
     if (user && count === 0) {
       createAccount();
       setCount((prev) => {
@@ -37,20 +50,23 @@ const DashBoard = () => {
     return null;
   }
   return (
-    <div className="pt-32">
-      <h2 className="pt-32 text-center">Hello From DashBoard</h2>;
-      <div className="text-center">
-        <img
-          src={user.picture}
-          alt="Profile"
-          className="w-16 h-16 mx-auto"
-          referrerPolicy="no-referrer"
-        />
-        <div className="profile__headline">
-          <h2 className="profile__title">{user.nickname}</h2>
-          <span className="profile__description">{user.email}</span>
+    <div className="pt-32 text-center">
+      {myGroup ? (
+        <h2>This is your group</h2>
+      ) : (
+        <div>
+          <h2>Let's find your group</h2>
+          {groups.length > 0 ? (
+            <div className="flex flex-wrap">
+              {groups.map((group, index) => {
+                return <GroupCard key={index} group={group} />;
+              })}
+            </div>
+          ) : (
+            <p className="mt-10">No available groups</p>
+          )}
         </div>
-      </div>
+      )}
     </div>
   );
 };

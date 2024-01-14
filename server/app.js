@@ -8,6 +8,7 @@ const url = process.env.DB_URL;
 const dbName = "pitchin-db";
 const mongoose = require("mongoose");
 const { createAccount } = require("./controllers/auth.controller");
+const { getAllGroups } = require("./controllers/group.controller");
 
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
@@ -30,6 +31,10 @@ try {
 app.get("/", (req, res) => {
   res.send("Hello, Express!");
 });
+
+// Group
+
+app.get("/api/group/all", getAllGroups);
 
 // User
 app.post("/api/auth/signup", createAccount);

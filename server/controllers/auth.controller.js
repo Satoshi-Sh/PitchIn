@@ -7,7 +7,6 @@ const createAccount = async (req, res) => {
 
     if (user) {
       const group = await Group.findOne({ users: { $elemMatch: { sub } } });
-      console.log(group);
       return res.status(200).json({
         message: "User already exists. User logged in.",
         user,
