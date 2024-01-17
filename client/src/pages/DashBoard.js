@@ -2,6 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import GroupCard from "../components/GroupCard";
+import GroupComponent from "../components/GroupComponent";
 
 const DashBoard = () => {
   const { user } = useAuth0();
@@ -52,7 +53,7 @@ const DashBoard = () => {
   return (
     <div className="pt-32 text-center">
       {myGroup ? (
-        <h2>This is your group</h2>
+        <GroupComponent group={myGroup} />
       ) : (
         <div>
           <h2>Let's find your group</h2>
