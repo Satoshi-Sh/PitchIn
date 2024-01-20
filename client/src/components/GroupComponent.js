@@ -6,7 +6,7 @@ const GroupComponent = ({ group }) => {
   return (
     <div className="px-10">
       <h2 className="font-bold text-2xl">Welcome Back to {name}</h2>
-      <h3 className="italic my-3">Registered Store</h3>
+      <h3 className="italic my-3">Registered Stores</h3>
       <div className="flex gap-4 flex-wrap justify-center my-3">
         {stores.map((store, index) => {
           return <StoreCard store={store} key={index} />;

@@ -6,13 +6,24 @@ const createAccount = async (req, res) => {
   try {
     const { username, picture, sub } = req.body;
     const user = await User.findOne({ sub });
-    console.log(sub);
 
     if (user) {
       const group = await Group.findOne({ users: user._id })
         .populate("users")
         .populate("stores")
-        .populate("items");
+        .populate({
+          path: "items",
+          populate: [
+            {
+              path: "store",
+              model: Store,
+            },
+            {
+              path: "approved_by",
+              model: User,
+            },
+          ],
+        });
       console.log(group);
       return res.status(200).json({
         message: "User already exists. User logged in.",
