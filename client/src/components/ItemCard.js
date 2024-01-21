@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ApproveButton } from "./buttons/approve-button";
 import { useAuth0 } from "@auth0/auth0-react";
 import { checkApprovedByMe } from "../utils/utils";
+import { PurchasedButton } from "./buttons/purchased-button";
 
 const ItemCard = ({
   item,
@@ -9,6 +10,7 @@ const ItemCard = ({
   setItemsToBuy,
   itemsSuggested,
   setItemsSuggested,
+  groupId,
   isBuy = false,
 }) => {
   const {
@@ -59,6 +61,9 @@ const ItemCard = ({
           />
         </div>
       )}
+      <div className="text-center">
+        {isBuy ? <PurchasedButton groupId={groupId} itemId={itemId} /> : null}
+      </div>
     </div>
   );
 };

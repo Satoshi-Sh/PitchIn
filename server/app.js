@@ -9,7 +9,11 @@ const dbName = "pitchin-db";
 const mongoose = require("mongoose");
 const { createAccount } = require("./controllers/auth.controller");
 const { getAllGroups } = require("./controllers/group.controller");
-const { approveItem, addItem } = require("./controllers/item.controller");
+const {
+  approveItem,
+  addItem,
+  removeItem,
+} = require("./controllers/item.controller");
 
 app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(express.json());
@@ -43,6 +47,7 @@ app.post("/api/auth/signup", createAccount);
 // Item
 app.put("/api/item/approve", approveItem);
 app.post("/api/item/add", addItem);
+app.delete("/api/item/remove", removeItem);
 
 // Start the server
 app.listen(port, () => {

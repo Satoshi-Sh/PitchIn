@@ -30,6 +30,7 @@ const GroupComponent = ({ group }) => {
               key={item._id}
               memberCount={memberCount}
               isBuy={true}
+              groupId={group._id}
             />
           );
         })}

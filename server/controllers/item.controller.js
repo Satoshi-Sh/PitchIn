@@ -27,13 +27,11 @@ const addItem = async (req, res) => {
     group.items.push(newItem);
     await group.save();
 
-    res
-      .status(201)
-      .json({
-        success: true,
-        message: "Item added to the group successfully",
-        item: newItem,
-      });
+    res.status(201).json({
+      success: true,
+      message: "Item added to the group successfully",
+      item: newItem,
+    });
   } catch (e) {
     console.error(e);
     res.status(502).json({ success: false, message: "Item was not added." });
@@ -65,7 +63,29 @@ const approveItem = async (req, res) => {
   }
 };
 
+const removeItem = async (req, res) => {
+  try {
+    const { itemId, groupId } = req.body;
+    const updatedGroup = await Group.findByIdAndUpdate(
+      groupId,
+      { $pull: { items: itemId } },
+      { new: true }
+    );
+    if (!updatedGroup) {
+      console.log("Group not found");
+      return res
+        .status(404)
+        .json({ success: false, message: "Group not found." });
+    }
+    res.status(200).json({ success: true, message: "The Item was deleted" });
+  } catch (e) {
+    console.error(e);
+    res.status(502).json({ success: false, message: "Item was not deleted." });
+  }
+};
+
 module.exports = {
   approveItem,
   addItem,
+  removeItem,
 };
