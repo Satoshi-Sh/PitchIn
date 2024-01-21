@@ -1,8 +1,13 @@
+import { splitItems } from "../utils/utils";
 import ItemCard from "./ItemCard";
 import StoreCard from "./StoreCard";
+import { useState } from "react";
 
 const GroupComponent = ({ group }) => {
   const { name, items, stores, memberCount } = group;
+  const [initialBuys, initialSuggests] = splitItems(items, memberCount);
+  const [itemsToBuy, setItemsToBuy] = useState(initialBuys);
+  const [itemsSuggested, setItemsSuggested] = useState(initialSuggests);
   return (
     <div className="px-10">
       <h2 className="font-bold text-2xl">Welcome Back to {name}</h2>
@@ -14,8 +19,18 @@ const GroupComponent = ({ group }) => {
       </div>
       <div className="text-left">
         <h3 className="italic font-semibold">Items to Buy</h3>
+        {itemsToBuy.map((item, index) => {
+          return (
+            <ItemCard
+              item={item}
+              key={index}
+              memberCount={memberCount}
+              isBuy={true}
+            />
+          );
+        })}
         <h3 className="italic font-semibold">Suggested Items</h3>
-        {items.map((item, index) => {
+        {itemsSuggested.map((item, index) => {
           return <ItemCard item={item} key={index} memberCount={memberCount} />;
         })}
       </div>

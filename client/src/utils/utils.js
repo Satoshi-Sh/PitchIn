@@ -8,3 +8,16 @@ export const checkApprovedByMe = (array, mySub) => {
   }
   return false;
 };
+
+export const splitItems = (items, memberCount) => {
+  const itemsToBuy = [];
+  const itemsSuggested = [];
+  for (let item of items) {
+    if (item.approveCount === memberCount) {
+      itemsToBuy.push(item);
+    } else {
+      itemsSuggested.push(item);
+    }
+  }
+  return [itemsToBuy, itemsSuggested];
+};

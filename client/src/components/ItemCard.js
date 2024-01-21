@@ -3,7 +3,7 @@ import { ApproveButton } from "./buttons/approve-button";
 import { useAuth0 } from "@auth0/auth0-react";
 import { checkApprovedByMe } from "../utils/utils";
 
-const ItemCard = ({ item, memberCount }) => {
+const ItemCard = ({ item, memberCount, isBuy = false }) => {
   const {
     name,
     description,
@@ -20,7 +20,13 @@ const ItemCard = ({ item, memberCount }) => {
   );
   const [count, setCount] = useState(approveCount);
   return (
-    <div className="border rounded-sm p-3 my-4 bg-slate-50">
+    <div
+      className={
+        isBuy
+          ? "border border-cyan-500 border-4 rounded-sm p-3 my-4 bg-slate-50"
+          : "border rounded-sm p-3 my-4 bg-slate-50"
+      }
+    >
       <h5 className="italic text-xl">{name}</h5>
       <h6 className="italic">-${price}</h6>
       <p>{description}</p>
