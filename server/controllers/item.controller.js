@@ -8,11 +8,12 @@ const approveItem = async (req, res) => {
     if (!user) {
       throw new Error("Cannot find the user");
     }
-    const updatedItem = await Item.updateOne(
+    const updatedItem = await Item.findOneAndUpdate(
       {
         _id: itemId,
       },
-      { $addToSet: { approved_by: user._id } }
+      { $addToSet: { approved_by: user._id } },
+      { new: true }
     );
 
     res.status(200).json({

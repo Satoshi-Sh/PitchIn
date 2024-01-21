@@ -3,7 +3,14 @@ import { ApproveButton } from "./buttons/approve-button";
 import { useAuth0 } from "@auth0/auth0-react";
 import { checkApprovedByMe } from "../utils/utils";
 
-const ItemCard = ({ item, memberCount, isBuy = false }) => {
+const ItemCard = ({
+  item,
+  memberCount,
+  setItemsToBuy,
+  itemsSuggested,
+  setItemsSuggested,
+  isBuy = false,
+}) => {
   const {
     name,
     description,
@@ -23,7 +30,7 @@ const ItemCard = ({ item, memberCount, isBuy = false }) => {
     <div
       className={
         isBuy
-          ? "border border-cyan-500 border-4 rounded-sm p-3 my-4 bg-slate-50"
+          ? "boder border-4 border-cyan-500 rounded-sm p-3 my-4 bg-slate-50"
           : "border rounded-sm p-3 my-4 bg-slate-50"
       }
     >
@@ -38,12 +45,17 @@ const ItemCard = ({ item, memberCount, isBuy = false }) => {
           {store.name} {store.location}
         </div>
       </div>
-      {isApprovedByMe ? null : (
+      {isApprovedByMe || isBuy ? null : (
         <div className="text-center">
           <ApproveButton
             itemId={itemId}
+            count={count}
+            memberCount={memberCount}
             setCount={setCount}
             setIsApprovedByMe={setIsApprovedByMe}
+            setItemsSuggested={setItemsSuggested}
+            itemsSuggested={itemsSuggested}
+            setItemsToBuy={setItemsToBuy}
           />
         </div>
       )}

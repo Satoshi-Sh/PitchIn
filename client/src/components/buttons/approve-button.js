@@ -1,8 +1,18 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import axios from "axios";
+import { moveItemToBuy } from "../../utils/utils";
 
-export const ApproveButton = ({ setIsApprovedByMe, setCount, itemId }) => {
+export const ApproveButton = ({
+  setIsApprovedByMe,
+  itemsSuggested,
+  setItemsSuggested,
+  setItemsToBuy,
+  setCount,
+  count,
+  memberCount,
+  itemId,
+}) => {
   const { user } = useAuth0();
   const handleClick = async () => {
     try {
@@ -12,9 +22,12 @@ export const ApproveButton = ({ setIsApprovedByMe, setCount, itemId }) => {
         sub: user.sub,
         itemId: itemId,
       });
-
-      setIsApprovedByMe((prev) => true);
-      setCount((prev) => prev + 1);
+      if (memberCount === count + 1) {
+        moveItemToBuy(itemId, itemsSuggested, setItemsSuggested, setItemsToBuy);
+      } else {
+        setIsApprovedByMe((prev) => true);
+        setCount((prev) => prev + 1);
+      }
     } catch (e) {
       console.log(e);
     }

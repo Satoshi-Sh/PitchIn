@@ -31,7 +31,16 @@ const GroupComponent = ({ group }) => {
         })}
         <h3 className="italic font-semibold">Suggested Items</h3>
         {itemsSuggested.map((item, index) => {
-          return <ItemCard item={item} key={index} memberCount={memberCount} />;
+          return (
+            <ItemCard
+              item={item}
+              key={index}
+              memberCount={memberCount}
+              itemsSuggested={itemsSuggested}
+              setItemsToBuy={setItemsToBuy}
+              setItemsSuggested={setItemsSuggested}
+            />
+          );
         })}
       </div>
     </div>
