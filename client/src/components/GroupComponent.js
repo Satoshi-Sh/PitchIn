@@ -23,7 +23,7 @@ const GroupComponent = ({ group }) => {
           return (
             <ItemCard
               item={item}
-              key={index}
+              key={item._id}
               memberCount={memberCount}
               isBuy={true}
             />
@@ -34,7 +34,7 @@ const GroupComponent = ({ group }) => {
           return (
             <ItemCard
               item={item}
-              key={index}
+              key={item._id}
               memberCount={memberCount}
               itemsSuggested={itemsSuggested}
               setItemsToBuy={setItemsToBuy}

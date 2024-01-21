@@ -40,7 +40,6 @@ export const moveItemToBuy = (
 
     // Add the item to itemsToBuy
     const itemToMove = itemsSuggested[indexOfItem];
-    console.log(itemToMove);
     itemToMove.approveCount++;
     setItemsSuggested(updatedSuggested);
     setItemsToBuy((prevItemsToBuy) => [...prevItemsToBuy, itemToMove]);
