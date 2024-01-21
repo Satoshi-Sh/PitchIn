@@ -17,6 +17,11 @@
   a {
     @apply text-blue-600 underline;
   }
+  input,
+  textarea,
+  select {
+    @apply border border-gray-300 focus:border-gray-400 p-1 bg-white;
+  }
 }
 
 @import "tailwindcss/components";

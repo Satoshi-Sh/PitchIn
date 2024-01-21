@@ -20,7 +20,6 @@ const ItemCard = ({
     approved_by,
     _id: itemId,
   } = item;
-  console.log(store);
   const { user } = useAuth0();
 
   const [isApprovedByMe, setIsApprovedByMe] = useState(

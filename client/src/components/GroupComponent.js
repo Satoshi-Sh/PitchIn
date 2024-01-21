@@ -1,6 +1,7 @@
 import { splitItems } from "../utils/utils";
 import ItemCard from "./ItemCard";
 import StoreCard from "./StoreCard";
+import { ItemSubmit } from "./ItemSubmit";
 import { useState } from "react";
 
 const GroupComponent = ({ group }) => {
@@ -16,6 +17,9 @@ const GroupComponent = ({ group }) => {
         {stores.map((store, index) => {
           return <StoreCard store={store} key={index} />;
         })}
+      </div>
+      <div className="my-5">
+        <ItemSubmit stores={stores} groupId={group._id} />
       </div>
       <div className="text-left">
         <h3 className="italic font-semibold">Items to Buy</h3>
