@@ -2,13 +2,23 @@ import { useState } from "react";
 import { ApproveButton } from "./buttons/approve-button";
 import { useAuth0 } from "@auth0/auth0-react";
 import { checkApprovedByMe } from "../utils/utils";
+
 const ItemCard = ({ item, memberCount }) => {
-  const { name, description, price, approveCount, store, approved_by } = item;
+  const {
+    name,
+    description,
+    price,
+    approveCount,
+    store,
+    approved_by,
+    _id: itemId,
+  } = item;
   const { user } = useAuth0();
 
   const [isApprovedByMe, setIsApprovedByMe] = useState(
     checkApprovedByMe(approved_by, user.sub)
   );
+  const [count, setCount] = useState(approveCount);
   return (
     <div className="border rounded-sm p-3 my-4 bg-slate-50">
       <h5 className="italic text-xl">{name}</h5>
@@ -16,7 +26,7 @@ const ItemCard = ({ item, memberCount }) => {
       <p>{description}</p>
       <div className="flex justify-between items-center px-10">
         <div>
-          Approved by {approveCount}/{memberCount}
+          Approved by {count}/{memberCount}
         </div>
         <div>
           {store.name} {store.location}
@@ -24,7 +34,11 @@ const ItemCard = ({ item, memberCount }) => {
       </div>
       {isApprovedByMe ? null : (
         <div className="text-center">
-          <ApproveButton />
+          <ApproveButton
+            itemId={itemId}
+            setCount={setCount}
+            setIsApprovedByMe={setIsApprovedByMe}
+          />
         </div>
       )}
     </div>
