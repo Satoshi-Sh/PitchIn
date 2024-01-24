@@ -13,7 +13,7 @@ const dbName = "pitchin-db";
 const stores = [
   {
     name: "Costco",
-    location: "220 King St.",
+    location: "220 Smith St.",
   },
   {
     name: "Walmart",
@@ -35,17 +35,17 @@ const users = [
   {
     username: "Mary",
     image:
-      "https://res.cloudinary.com/dmaijlcxd/image/upload/v1670714085/samples/ecommerce/car-interior-design.jpg",
+      "https://res.cloudinary.com/dmaijlcxd/image/upload/v1706135766/20231217_174310_opc71q.jpg",
   },
   {
     username: "Blue",
     image:
-      "https://res.cloudinary.com/dmaijlcxd/image/upload/v1670714076/samples/ecommerce/analog-classic.jpg",
+      "https://res.cloudinary.com/dmaijlcxd/image/upload/v1706135767/20231210_180756_dekn0x.jpg",
   },
   {
     username: "Luna",
     image:
-      "https://res.cloudinary.com/dmaijlcxd/image/upload/v1670714077/samples/people/kitchen-bar.jpg",
+      "https://res.cloudinary.com/dmaijlcxd/image/upload/v1706135769/20231210_182404_hauiiv.jpg",
   },
   {
     username: "Mela",
@@ -153,8 +153,9 @@ const insertSameplesData = async () => {
 
     const groups = [
       {
-        name: "Human",
-        description: "We buy daily grocery items in a bulk.",
+        name: "Meat Lovers",
+        description:
+          "We buy daily grocery items in a bulk especially for meat products.",
         owner: us[0],
         users: [us[0], us[4]],
         stores: [ss[0], ss[1], ss[3]],
@@ -162,7 +163,7 @@ const insertSameplesData = async () => {
         max_num: 4,
       },
       {
-        name: "Dogs",
+        name: "Dog Lovers",
         description: "We buy dog stuff in a bulk.",
         owner: us[1],
         users: [us[1], us[2], us[3]],
