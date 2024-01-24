@@ -107,7 +107,7 @@ const insertSameplesData = async () => {
         description: "toast bread",
         price: 10.99,
         store: ss[0],
-        approved_by: us[4],
+        approved_by: [us[4], us[0]],
       },
       {
         name: "Milk 10L 3%",
@@ -121,7 +121,7 @@ const insertSameplesData = async () => {
         description: "Fine quality meat",
         price: 31.99,
         store: ss[1],
-        approved_by: [us[4]],
+        approved_by: [us[4], us[0]],
       },
       {
         name: "Chewing Bones 10kg",
@@ -140,7 +140,7 @@ const insertSameplesData = async () => {
       {
         name: "Toilet Paper 60 Rolls",
         description: "Fine Quality toilet paper",
-        price: 40.99,
+        price: 22.99,
         store: ss[0],
         approved_by: [us[0]],
       },
