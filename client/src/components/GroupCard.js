@@ -20,7 +20,7 @@ const GroupCard = ({ group }) => {
           </div>
         </div>
       </div>
-      <JoinButton />
+      <JoinButton groupId={group._id} />
     </div>
   );
 };

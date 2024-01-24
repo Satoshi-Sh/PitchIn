@@ -8,7 +8,7 @@ const url = process.env.DB_URL;
 const dbName = "pitchin-db";
 const mongoose = require("mongoose");
 const { createAccount } = require("./controllers/auth.controller");
-const { getAllGroups } = require("./controllers/group.controller");
+const { getAllGroups, addMember } = require("./controllers/group.controller");
 const {
   approveItem,
   addItem,
@@ -40,7 +40,7 @@ app.get("/", (req, res) => {
 // Group
 
 app.get("/api/group/all", getAllGroups);
-
+app.post("/api/group/add", addMember);
 // User
 app.post("/api/auth/signup", createAccount);
 
